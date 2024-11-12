@@ -7,4 +7,5 @@
     <string name="favorites">Favoris</string>
     <string name="no_candidate">Aucun candidat</string>
     <string name="candidate_image">Image du candidat</string>
+    <string name="candidateName">%1$s %2$s</string>
 </resources>

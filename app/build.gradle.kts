@@ -56,6 +56,8 @@ dependencies {
     ksp(libs.hilt.compiler)
     implementation(libs.hilt)
 
+    implementation(libs.androidx.fragment.ktx)
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
