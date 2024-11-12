@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Vitesse</string>
+    <string name="searchbar_hint">Search</string>
+    <string name="progressbarDescrition">Waiting For Data</string>
+    <string name="searchIcon">Search Icon</string>
+    <string name="all">All</string>
+    <string name="favorites">Favorites</string>
+    <string name="no_candidate">No candidate</string>
+    <string name="candidate_image">candidate Image</string>
+</resources>

@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Vitesse</string>
+    <string name="searchbar_hint">Rechercher un candidat</string>
+    <string name="progressbarDescrition">En attente des données</string>
+    <string name="searchIcon">Icone de Recherche</string>
+    <string name="all">Tous</string>
+    <string name="favorites">Favoris</string>
+    <string name="no_candidate">Aucun candidat</string>
+    <string name="candidate_image">Image du candidat</string>
 </resources>
