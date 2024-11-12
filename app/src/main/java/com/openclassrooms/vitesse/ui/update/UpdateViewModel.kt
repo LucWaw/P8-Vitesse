@@ -1,7 +1,6 @@
 package com.openclassrooms.vitesse.ui.update
 
-import dagger.hilt.android.lifecycle.HiltViewModel
+import androidx.lifecycle.ViewModel
 
-@HiltViewModel
-class UpdateViewModel {
+class UpdateViewModel: ViewModel() {
 }

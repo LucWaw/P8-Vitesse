@@ -1,7 +1,6 @@
 package com.openclassrooms.vitesse.ui.detail
 
-import dagger.hilt.android.lifecycle.HiltViewModel
+import androidx.lifecycle.ViewModel
 
-@HiltViewModel
-class DetailViewModel {
+class DetailViewModel: ViewModel() {
 }

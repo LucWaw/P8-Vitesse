@@ -13,8 +13,9 @@ import com.openclassrooms.vitesse.data.dao.FavoriteDao
 import com.openclassrooms.vitesse.data.entity.CandidateDto
 import com.openclassrooms.vitesse.data.entity.FavoriteDto
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.net.URI
+import kotlinx.coroutines.withContext
 import java.time.LocalDateTime
 import java.time.ZoneOffset
 
@@ -69,12 +70,16 @@ abstract class VitesseDatabase : RoomDatabase(){
          */
         @RequiresApi(Build.VERSION_CODES.O)
         suspend fun populateDatabase(candidateDao: CandidateDao, favoriteDao: FavoriteDao) {
+            withContext(Dispatchers.IO) {
+                launch {
+                    candidateDao.deleteAll()
+                }
+            }
 
-            candidateDao.deleteCandidateById(1)
-            candidateDao.deleteCandidateById(2)
 
             candidateDao.addCandidate(
                 CandidateDto(
+                    id = 1,
                     firstName = "John",
                     lastName = "Doe",
                     phoneNumber = "0254546465",
@@ -89,6 +94,7 @@ abstract class VitesseDatabase : RoomDatabase(){
 
             candidateDao.addCandidate(
                 CandidateDto(
+                    id = 2,
                     firstName = "Michel",
                     lastName = "Truc",
                     phoneNumber = "0254546465",

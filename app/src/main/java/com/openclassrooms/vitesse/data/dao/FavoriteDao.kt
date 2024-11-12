@@ -1,14 +1,16 @@
 package com.openclassrooms.vitesse.data.dao
 
+import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Upsert
 import com.openclassrooms.vitesse.data.entity.CandidateDto
 import com.openclassrooms.vitesse.data.entity.FavoriteDto
 import kotlinx.coroutines.flow.Flow
 
+@Dao
 interface FavoriteDao {
     @Upsert
-    suspend fun addFavorite(Favorite: FavoriteDto): Long
+    suspend fun addFavorite(favorite: FavoriteDto): Long
 
 
     @Query("SELECT candidateId FROM favorite")

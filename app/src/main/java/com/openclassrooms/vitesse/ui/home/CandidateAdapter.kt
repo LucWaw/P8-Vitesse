@@ -1,6 +1,6 @@
 package com.openclassrooms.vitesse.ui.home
 
-import android.content.res.Resources
+import android.annotation.SuppressLint
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.openclassrooms.vitesse.R
 import com.openclassrooms.vitesse.domain.model.Candidate
 
-class CandidateAdapter(allItemsFragment: AllItemsFragment) :
+class CandidateAdapter() :
     ListAdapter<Candidate, CandidateAdapter.CandidateViewHolder>(
         DIFF_CALLBACK
     ) {
@@ -35,11 +35,12 @@ class CandidateAdapter(allItemsFragment: AllItemsFragment) :
             LayoutInflater.from(parent.context).inflate(R.layout.item_candidate, parent, false)
         return CandidateViewHolder(itemView)    }
 
+    @SuppressLint("SetTextI18n")//No need translation
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: CandidateViewHolder, position: Int) {
         val candidate = getItem(position)
 
-        holder.name.text = Resources.getSystem().getString(R.string.candidateName, candidate.firstName, candidate.lastName.uppercase() )
+        holder.name.text = candidate.firstName + " " + candidate.lastName.uppercase()
 
         holder.notes.text = candidate.notes
 

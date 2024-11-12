@@ -15,11 +15,11 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class AllItemsFragment : Fragment() {
+class FavoriteFragment  : Fragment() {
     private var _binding: RecyclerCandidatesBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: AllCandidatesViewModel by viewModels()
+    private val viewModel: FavoriteViewModel by viewModels()
     private lateinit var candidateAdapter: CandidateAdapter
 
     override fun onDestroyView() {
@@ -51,7 +51,7 @@ class AllItemsFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.O)
     private fun observeCandidates() {
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.candidatesFlow.collect { candidates ->
+            viewModel.favoritesFlow.collect { candidates ->
                 candidateAdapter.submitList(candidates)
             }
         }
@@ -62,5 +62,4 @@ class AllItemsFragment : Fragment() {
         binding.candidateRecyclerview.layoutManager = LinearLayoutManager(context)
         binding.candidateRecyclerview.adapter = candidateAdapter
     }
-
 }
