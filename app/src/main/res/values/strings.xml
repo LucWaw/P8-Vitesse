@@ -8,4 +8,10 @@
     <string name="no_candidate">Aucun candidat</string>
     <string name="candidate_image">Image du candidat</string>
     <string name="search_hint">Recherche</string>
+    <string name="page_Add_title">Ajouter un candidat</string>
+    <string name="email">Email</string>
+    <string name="firstName">Prénom</string>
+    <string name="lastName">Nom</string>
+    <string name="phone">Téléphone</string>
+    <string name="phone_icone">Icone de téléphone</string>
 </resources>

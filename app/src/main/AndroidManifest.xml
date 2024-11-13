@@ -23,7 +23,14 @@
             </intent-filter>
         </activity>
 
-
+        <activity android:name=".ui.addupdate.AddUpdateScreen"
+            android:exported="true"
+            android:label="@string/page_Add_title"
+            android:parentActivityName=".ui.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.MainActivity" />
+        </activity>
 
 
     </application>

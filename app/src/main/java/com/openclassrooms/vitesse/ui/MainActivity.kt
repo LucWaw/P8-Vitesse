@@ -1,5 +1,6 @@
 package com.openclassrooms.vitesse.ui
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.text.Editable
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayoutMediator
 import com.openclassrooms.vitesse.R
 import com.openclassrooms.vitesse.databinding.ActivityMainBinding
+import com.openclassrooms.vitesse.ui.addupdate.AddUpdateScreen
 import com.openclassrooms.vitesse.ui.home.AllCandidatesViewModel
 import com.openclassrooms.vitesse.ui.home.CandidateAdapter
 import com.openclassrooms.vitesse.ui.home.ViewPagerAdapter
@@ -30,7 +32,6 @@ class MainActivity : AppCompatActivity() {
     private val viewModelCandidates: AllCandidatesViewModel by viewModels()
 
 
-
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,15 +42,15 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
-
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        setUpFab()
 
 
         binding.loading.visibility = View.VISIBLE
 
+        //Tab Layout set up
         val adapter = ViewPagerAdapter(this)
         binding.viewPager.adapter = adapter
 
@@ -60,10 +61,7 @@ class MainActivity : AppCompatActivity() {
             }
         }.attach()
 
-
-
-
-
+        //Search bar set up
         binding.searchView.setupWithSearchBar(binding.searchBar)
         binding.searchBar.navigationIcon = null
         val candidateAdapter = CandidateAdapter()
@@ -91,11 +89,14 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
-
-
     }
 
-
-
-
+    private fun setUpFab() {
+        binding.fab.setOnClickListener {
+            //Go to AddUpdateScreen
+            Intent(this, AddUpdateScreen::class.java).also {
+                startActivity(it)
+            }
+        }
+    }
 }

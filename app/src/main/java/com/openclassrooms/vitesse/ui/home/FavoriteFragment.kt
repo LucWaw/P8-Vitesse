@@ -57,11 +57,6 @@ class FavoriteFragment  : Fragment() {
         observeCandidates()
         activityBinding.loading.visibility = View.GONE
 
-        //setUpFab()
-    }
-
-    private fun setUpFab() {
-        TODO("Not yet implemented")
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
