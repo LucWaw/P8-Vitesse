@@ -30,4 +30,6 @@ class FavoriteViewModel @Inject constructor(private val favoriteRepository: Favo
             _favoritesFlow.value = favorites
         }
     }
+
+
 }

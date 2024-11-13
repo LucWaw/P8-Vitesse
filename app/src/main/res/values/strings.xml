@@ -7,4 +7,5 @@
     <string name="favorites">Favoris</string>
     <string name="no_candidate">Aucun candidat</string>
     <string name="candidate_image">Image du candidat</string>
+    <string name="search_hint">Recherche</string>
 </resources>

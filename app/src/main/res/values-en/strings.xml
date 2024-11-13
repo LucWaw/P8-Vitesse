@@ -8,4 +8,5 @@
     <string name="favorites">Favorites</string>
     <string name="no_candidate">No candidate</string>
     <string name="candidate_image">candidate Image</string>
+    <string name="search_hint">Search</string>
 </resources>

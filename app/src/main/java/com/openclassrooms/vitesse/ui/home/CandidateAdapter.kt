@@ -48,6 +48,8 @@ class CandidateAdapter() :
         holder.image.setImageURI(candidate.image)
     }
 
+
+
     companion object {
         private val DIFF_CALLBACK: DiffUtil.ItemCallback<Candidate> =
             object : DiffUtil.ItemCallback<Candidate>() {
