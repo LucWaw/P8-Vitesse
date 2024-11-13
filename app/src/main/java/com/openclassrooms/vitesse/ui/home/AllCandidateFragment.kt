@@ -50,9 +50,18 @@ class AllItemsFragment : Fragment() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onResume() {
         super.onResume()
-        activityBinding.noData.visibility = View.GONE
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.candidatesFlow.collect { candidates ->
+                if (candidates.isEmpty()) {
+                    activityBinding.noData.visibility = View.VISIBLE
+                } else {
+                    activityBinding.noData.visibility = View.GONE
+                }
+            }
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
