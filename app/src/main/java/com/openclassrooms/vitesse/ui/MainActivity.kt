@@ -4,6 +4,7 @@ import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
@@ -40,11 +41,15 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        // Initialisation de ViewBinding
+
+
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Initialisation du ViewPager2 et du TabLayout à partir du binding
+
+        binding.loading.visibility = View.VISIBLE
+
         val adapter = ViewPagerAdapter(this)
         binding.viewPager.adapter = adapter
 
@@ -58,6 +63,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
+
         binding.searchView.setupWithSearchBar(binding.searchBar)
         binding.searchBar.navigationIcon = null
         val candidateAdapter = CandidateAdapter()
@@ -65,17 +71,15 @@ class MainActivity : AppCompatActivity() {
         binding.searchRecyclerview.adapter = candidateAdapter
         binding.searchView.editText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                // Aucune action nécessaire ici
+
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                // Traitez les changements en temps réel si nécessaire
             }
 
             override fun afterTextChanged(s: Editable?) {
                 val query = s.toString().trim()
                 if (query.isNotEmpty()) {
-                    // Lancement de SearchActivity avec la requête de recherche
                     viewModelCandidates.filter(query)
 
                     lifecycleScope.launch {

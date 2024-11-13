@@ -65,8 +65,8 @@ abstract class VitesseDatabase : RoomDatabase(){
         /**
          * Prepopulate the database
          *
-         * @param sleepDao dao for sleep data
-         * @param userDtoDao dao for user data
+         * @param candidateDao the candidate DAO
+         * @param favoriteDao the favorite DAO
          */
         @RequiresApi(Build.VERSION_CODES.O)
         suspend fun populateDatabase(candidateDao: CandidateDao, favoriteDao: FavoriteDao) {

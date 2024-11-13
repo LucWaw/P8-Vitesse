@@ -18,6 +18,8 @@ class CandidateAdapter() :
     ListAdapter<Candidate, CandidateAdapter.CandidateViewHolder>(
         DIFF_CALLBACK
     ) {
+
+
     inner class CandidateViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var name:TextView
         var notes:TextView
