@@ -3,6 +3,8 @@ package com.openclassrooms.vitesse.ui.home
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.openclassrooms.vitesse.ui.home.allcandidates.AllItemsFragment
+import com.openclassrooms.vitesse.ui.home.favorites.FavoriteFragment
 
 
 class ViewPagerAdapter(fragmentActivity: FragmentActivity) :

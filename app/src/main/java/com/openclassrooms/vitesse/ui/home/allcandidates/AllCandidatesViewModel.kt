@@ -1,4 +1,4 @@
-package com.openclassrooms.vitesse.ui.home
+package com.openclassrooms.vitesse.ui.home.allcandidates
 
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -26,7 +26,7 @@ class AllCandidatesViewModel @Inject constructor(private val candidateRepository
         loadAllCandidates()
     }
 
-    private fun loadAllCandidates() {
+    fun loadAllCandidates() {
         viewModelScope.launch(Dispatchers.IO) {
             val candidates = candidateRepository.getAllCandidates()
             _candidatesFlow.value = candidates

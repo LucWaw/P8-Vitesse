@@ -1,4 +1,4 @@
-package com.openclassrooms.vitesse.ui.home
+package com.openclassrooms.vitesse.ui.home.allcandidates
 
 import android.content.Context
 import android.os.Build
@@ -15,30 +15,24 @@ import com.openclassrooms.vitesse.R
 import com.openclassrooms.vitesse.databinding.ActivityMainBinding
 import com.openclassrooms.vitesse.databinding.RecyclerCandidatesBinding
 import com.openclassrooms.vitesse.ui.MainActivity
+import com.openclassrooms.vitesse.ui.home.CandidateAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class FavoriteFragment  : Fragment() {
+class AllItemsFragment : Fragment() {
     private var _binding: RecyclerCandidatesBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var activityBinding: ActivityMainBinding
 
 
-    private val viewModel: FavoriteViewModel by viewModels()
+    private val viewModel: AllCandidatesViewModel by viewModels()
     private lateinit var candidateAdapter: CandidateAdapter
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is MainActivity) {
-            activityBinding = ActivityMainBinding.bind(context.findViewById(R.id.main))
-        }
     }
 
     override fun onCreateView(
@@ -50,20 +44,19 @@ class FavoriteFragment  : Fragment() {
         return binding.root
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setupRecyclerView()
-        observeCandidates()
-        activityBinding.loading.visibility = View.GONE
-
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is MainActivity) {
+            activityBinding = ActivityMainBinding.bind(context.findViewById(R.id.main))
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onResume() {
         super.onResume()
+        viewModel.loadAllCandidates()
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.favoritesFlow.collect { candidates ->
+            viewModel.candidatesFlow.collect { candidates ->
                 if (candidates.isEmpty()) {
                     activityBinding.noData.visibility = View.VISIBLE
                 } else {
@@ -74,9 +67,21 @@ class FavoriteFragment  : Fragment() {
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupRecyclerView()
+        observeCandidates()
+        activityBinding.loading.visibility = View.GONE
+
+
+    }
+
+
+
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun observeCandidates() {
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.favoritesFlow.collect { candidates ->
+            viewModel.candidatesFlow.collect { candidates ->
                 candidateAdapter.submitList(candidates)
                 if (candidates.isEmpty()) {
                     activityBinding.noData.visibility = View.VISIBLE
@@ -92,4 +97,5 @@ class FavoriteFragment  : Fragment() {
         binding.candidateRecyclerview.layoutManager = LinearLayoutManager(context)
         binding.candidateRecyclerview.adapter = candidateAdapter
     }
+
 }

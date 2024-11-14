@@ -18,7 +18,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.openclassrooms.vitesse.R
 import com.openclassrooms.vitesse.databinding.ActivityMainBinding
 import com.openclassrooms.vitesse.ui.addupdate.AddUpdateScreen
-import com.openclassrooms.vitesse.ui.home.AllCandidatesViewModel
+import com.openclassrooms.vitesse.ui.home.allcandidates.AllCandidatesViewModel
 import com.openclassrooms.vitesse.ui.home.CandidateAdapter
 import com.openclassrooms.vitesse.ui.home.ViewPagerAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -44,9 +44,7 @@ class MainActivity : AppCompatActivity() {
         }
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         setUpFab()
-
 
         binding.loading.visibility = View.VISIBLE
 

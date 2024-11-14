@@ -1,4 +1,4 @@
-package com.openclassrooms.vitesse.ui.home
+package com.openclassrooms.vitesse.ui.home.favorites
 
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -24,7 +24,7 @@ class FavoriteViewModel @Inject constructor(private val favoriteRepository: Favo
         loadAllFavorites()
     }
 
-    private fun loadAllFavorites(){
+    fun loadAllFavorites(){
         viewModelScope.launch(Dispatchers.IO) {
             val favorites = favoriteRepository.getAllFavoritesCandidates()
             _favoritesFlow.value = favorites

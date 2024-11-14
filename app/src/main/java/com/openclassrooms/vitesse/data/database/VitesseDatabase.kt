@@ -70,44 +70,10 @@ abstract class VitesseDatabase : RoomDatabase(){
          */
         @RequiresApi(Build.VERSION_CODES.O)
         suspend fun populateDatabase(candidateDao: CandidateDao, favoriteDao: FavoriteDao) {
-            withContext(Dispatchers.IO) {
-                launch {
-                    candidateDao.deleteAll()
-                }
-            }
 
 
-            candidateDao.addCandidate(
-                CandidateDto(
-                    id = 1,
-                    firstName = "John",
-                    lastName = "Doe",
-                    phoneNumber = "0254546465",
-                    email = "zfdfz@exemple.com",
-                    birthday = LocalDateTime.now().minusDays(1).atZone(ZoneOffset.UTC).toInstant()
-                        .toEpochMilli(),
-                    salaryClaim = 1000.0,
-                    notes = "Notes",
-                    image = Uri.parse("https://www.example.com").toString()
-                )
-            )
 
-            candidateDao.addCandidate(
-                CandidateDto(
-                    id = 2,
-                    firstName = "Michel",
-                    lastName = "Truc",
-                    phoneNumber = "0254546465",
-                    email = "zfdfz@exemple.com",
-                    birthday = LocalDateTime.now().minusDays(1).atZone(ZoneOffset.UTC).toInstant()
-                        .toEpochMilli(),
-                    salaryClaim = 1000.0,
-                    notes = "NotesEEEE",
-                    image = Uri.parse("https://www.example.com").toString()
-                )
-            )
 
-            favoriteDao.addFavorite(FavoriteDto(1))
 
 
 
