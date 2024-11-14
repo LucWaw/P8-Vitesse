@@ -15,4 +15,7 @@
     <string name="lastName">Last Name</string>
     <string name="phone">Phone</string>
     <string name="phone_icone">Phone Icone</string>
+    <string name="birthday_icon">Birthday Icon</string>
+    <string name="salary">Expected salary</string>
+    <string name="notes">Notes</string>
 </resources>
