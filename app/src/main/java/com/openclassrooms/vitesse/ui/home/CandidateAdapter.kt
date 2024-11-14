@@ -47,7 +47,10 @@ class CandidateAdapter() :
         holder.notes.text = candidate.notes
 
         //Set image from candidates.image URI
-        holder.image.setImageURI(candidate.image)
+        if (candidate.image.toString() != "") {
+            holder.image.setImageURI(candidate.image)
+        }
+
     }
 
 
