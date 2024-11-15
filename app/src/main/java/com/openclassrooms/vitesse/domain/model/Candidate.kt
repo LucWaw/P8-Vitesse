@@ -1,8 +1,6 @@
 package com.openclassrooms.vitesse.domain.model
 
 import android.net.Uri
-import android.os.Build
-import androidx.annotation.RequiresApi
 import com.openclassrooms.vitesse.data.entity.CandidateDto
 import java.time.LocalDateTime
 import java.time.ZoneOffset
@@ -19,7 +17,6 @@ data class Candidate(
     val image: Uri
 ) {
     // Convert this Candidate to a CandidateDto
-    @RequiresApi(Build.VERSION_CODES.O)
     fun toDto(): CandidateDto {
         return CandidateDto(
             id = id ?: 0L, // Default to 0 if `id` is null for auto-generation
@@ -36,7 +33,6 @@ data class Candidate(
 
     companion object {
         // Convert a CandidateDto to a Candidate
-        @RequiresApi(Build.VERSION_CODES.O)
         fun fromDto(candidateDto: CandidateDto): Candidate {
             return Candidate(
                 id = if (candidateDto.id == 0L) null else candidateDto.id, // If `id` is 0, it's a new entry

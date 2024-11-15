@@ -1,8 +1,6 @@
 package com.openclassrooms.vitesse.data.repository
 
-import android.os.Build
 import android.util.Log
-import androidx.annotation.RequiresApi
 import com.openclassrooms.vitesse.data.dao.CandidateDao
 import com.openclassrooms.vitesse.domain.model.Candidate
 import kotlinx.coroutines.flow.first
@@ -10,7 +8,6 @@ import kotlinx.coroutines.flow.first
 class CandidateRepository(private val candidateDao: CandidateDao) {
 
     // Retrieve all candidates
-    @RequiresApi(Build.VERSION_CODES.O)
     suspend fun getAllCandidates(): List<Candidate> {
         return try {
             candidateDao.getAllCandidates()
@@ -23,7 +20,6 @@ class CandidateRepository(private val candidateDao: CandidateDao) {
     }
 
     // Add a new candidate
-    @RequiresApi(Build.VERSION_CODES.O)
     suspend fun addCandidate(candidate: Candidate) {
         try {
             candidateDao.addCandidate(candidate.toDto())
@@ -33,7 +29,6 @@ class CandidateRepository(private val candidateDao: CandidateDao) {
     }
 
     // Retrieve a candidate by ID
-    @RequiresApi(Build.VERSION_CODES.O)
     suspend fun getCandidateById(id: Long): Candidate? {
         return try {
             candidateDao.getCandidateById(id).let { Candidate.fromDto(it) }

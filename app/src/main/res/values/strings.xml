@@ -20,4 +20,14 @@
     <string name="save">Sauvegarder</string>
     <string name="mandatory_field">Champ obligatoire</string>
     <string name="invalid_format">Format invalide</string>
+    <string name="star">Étoile</string>
+    <string name="edit">Modifier</string>
+    <string name="delete">Supprimer</string>
+    <string name="call">Appel</string>
+    <string name="sms">SMS</string>
+    <string name="email2">E-mail</string>
+    <string name="about">A propos</string>
+    <string name="birthday">Anniversaire</string>
+    <string name="salaryNeed">Prétentions salariales</string>
+    <string name="page_Detail_title">Details du candidat</string>
 </resources>

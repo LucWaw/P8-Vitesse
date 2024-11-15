@@ -2,15 +2,15 @@ package com.openclassrooms.vitesse.ui.addupdate
 
 import android.content.Intent
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import com.openclassrooms.vitesse.R
 import com.openclassrooms.vitesse.databinding.AddCandidateBinding
 import com.openclassrooms.vitesse.domain.model.Candidate
@@ -26,18 +26,26 @@ class AddUpdateScreen : AppCompatActivity() {
     private val viewModel: AddUpdateViewModel by viewModels()
 
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = AddCandidateBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        ViewCompat.setOnApplyWindowInsetsListener(binding.addUpdateCandidate) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
         setSaveCandidate()
+        setReturnBack()
+    }
+
+    private fun setReturnBack() {
+        binding.topAppBar.setNavigationOnClickListener {
+            finish()
+        }
     }
 
 
-
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun setSaveCandidate() {
         var image: Uri? = null
 
@@ -117,6 +125,6 @@ class AddUpdateScreen : AppCompatActivity() {
             finish()
         }
     }
-    fun CharSequence?.isValidEmail() = !isNullOrEmpty() && Patterns.EMAIL_ADDRESS.matcher(this).matches()
+    private fun CharSequence?.isValidEmail() = !isNullOrEmpty() && Patterns.EMAIL_ADDRESS.matcher(this).matches()
 
 }

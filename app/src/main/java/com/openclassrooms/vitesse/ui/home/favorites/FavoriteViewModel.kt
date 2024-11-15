@@ -1,7 +1,5 @@
 package com.openclassrooms.vitesse.ui.home.favorites
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.openclassrooms.vitesse.data.repository.FavoriteRepository
@@ -14,7 +12,6 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@RequiresApi(Build.VERSION_CODES.O)
 @HiltViewModel
 class FavoriteViewModel @Inject constructor(private val favoriteRepository: FavoriteRepository) : ViewModel(){
     private val _favoritesFlow = MutableStateFlow<List<Candidate>>(emptyList())

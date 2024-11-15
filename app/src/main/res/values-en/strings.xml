@@ -21,4 +21,14 @@
     <string name="save">Save</string>
     <string name="mandatory_field">Mandatory field</string>
     <string name="invalid_format">Invalid format</string>
+    <string name="star">Star</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="call">Call</string>
+    <string name="sms">SMS</string>
+    <string name="email2">E-mail</string>
+    <string name="about">About</string>
+    <string name="birthday">Birthday</string>
+    <string name="salaryNeed">Expected Salary</string>
+    <string name="page_Detail_title">Candidate details</string>
 </resources>

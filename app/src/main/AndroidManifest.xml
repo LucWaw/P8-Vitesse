@@ -32,6 +32,16 @@
                 android:value=".ui.MainActivity" />
         </activity>
 
+        <activity android:name=".ui.detail.DetailScreen"
+            android:exported="true"
+            android:label="@string/page_Detail_title"
+            android:parentActivityName=".ui.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.MainActivity" />
+
+        </activity>
+
 
     </application>
 

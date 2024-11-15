@@ -36,6 +36,9 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
+
+        isCoreLibraryDesugaringEnabled = true
+
     }
     kotlinOptions {
         jvmTarget = "1.8"
@@ -52,11 +55,15 @@ dependencies {
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
 
+    coreLibraryDesugaring(libs.desugar.jdk.libs)
+
+
     //hilt
     ksp(libs.hilt.compiler)
     implementation(libs.hilt)
 
     implementation(libs.androidx.fragment.ktx)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
 
 
     implementation(libs.androidx.core.ktx)

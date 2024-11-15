@@ -1,19 +1,17 @@
 package com.openclassrooms.vitesse.ui.home
 
 import android.annotation.SuppressLint
-import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.openclassrooms.vitesse.databinding.ItemCandidateBinding
 import com.openclassrooms.vitesse.domain.model.Candidate
 
-class CandidateAdapter() :
+class CandidateAdapter( private val listener: OnCandidateClickListener) :
     ListAdapter<Candidate, CandidateAdapter.CandidateViewHolder>(
         DIFF_CALLBACK
     ) {
@@ -22,6 +20,19 @@ class CandidateAdapter() :
         var name:TextView = binding.name
         var notes:TextView = binding.notes
         var image: ImageView = binding.imageView
+
+        fun bind(candidate: Candidate, listener: OnCandidateClickListener) {
+            itemView.setOnClickListener {
+                listener.onCandidateClick(candidate)
+            }
+        }
+    }
+
+    interface OnCandidateClickListener
+    {
+
+        fun onCandidateClick(candidate: Candidate)
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CandidateViewHolder {
@@ -34,7 +45,6 @@ class CandidateAdapter() :
     }
 
     @SuppressLint("SetTextI18n")//No need translation
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: CandidateViewHolder, position: Int) {
         val candidate = getItem(position)
 
@@ -46,6 +56,8 @@ class CandidateAdapter() :
         if (candidate.image.toString() != "") {
             holder.image.setImageURI(candidate.image)
         }
+
+        holder.bind(candidate, listener)
 
     }
 

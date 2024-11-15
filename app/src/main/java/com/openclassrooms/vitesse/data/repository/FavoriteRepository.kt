@@ -1,8 +1,6 @@
 package com.openclassrooms.vitesse.data.repository
 
-import android.os.Build
 import android.util.Log
-import androidx.annotation.RequiresApi
 import com.openclassrooms.vitesse.data.dao.FavoriteDao
 import com.openclassrooms.vitesse.domain.model.Candidate
 import com.openclassrooms.vitesse.domain.model.Favorite
@@ -13,7 +11,6 @@ import kotlinx.coroutines.flow.flatMapLatest
 class FavoriteRepository(private val favoriteDao: FavoriteDao) {
 
     // Retrieve all favorite candidates
-    @RequiresApi(Build.VERSION_CODES.O)
     @OptIn(ExperimentalCoroutinesApi::class)
     suspend fun getAllFavoritesCandidates(): List<Candidate> {
         return try {
@@ -52,7 +49,6 @@ class FavoriteRepository(private val favoriteDao: FavoriteDao) {
     }
 
     // Get candidate by favorite ID
-    @RequiresApi(Build.VERSION_CODES.O)
     suspend fun getCandidateFromFavoriteId(candidateId: Long): Candidate? {
         return try {
             val candidateDto = favoriteDao.getCandidateFromFavoriteId(candidateId)

@@ -1,7 +1,5 @@
 package com.openclassrooms.vitesse.ui.home.allcandidates
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.openclassrooms.vitesse.data.repository.CandidateRepository
@@ -15,7 +13,6 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@RequiresApi(Build.VERSION_CODES.O)
 @HiltViewModel
 class AllCandidatesViewModel @Inject constructor(private val candidateRepository: CandidateRepository) : ViewModel() {
     private val _candidatesFlow = MutableStateFlow<List<Candidate>>(emptyList())
