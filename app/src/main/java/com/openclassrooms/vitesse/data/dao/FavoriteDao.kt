@@ -25,4 +25,7 @@ interface FavoriteDao {
 
     @Query("SELECT * FROM candidate WHERE id IN (:candidateIds)")
     fun getCandidatesByIds(candidateIds: List<Long>): Flow<List<CandidateDto>>
+
+    @Query("DELETE FROM favorite WHERE candidateId = :candidateId")
+    suspend fun deleteFavoriteById(candidateId: Long)
 }

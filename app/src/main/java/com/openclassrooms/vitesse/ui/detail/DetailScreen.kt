@@ -10,7 +10,9 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.openclassrooms.vitesse.R
 import com.openclassrooms.vitesse.databinding.DetailCandidateBinding
@@ -56,24 +58,46 @@ class DetailScreen : AppCompatActivity() {
             finish()
         }
 
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.CREATED) {
+                viewModel.isFavoriteFlow.collect { isFavorite ->
+                    if (isFavorite) {
+                        binding.topAppBar.menu.findItem(R.id.favorite)
+                            .setIcon(R.drawable.star_yellow)
+                    } else {
+                        binding.topAppBar.menu.findItem(R.id.favorite)
+                            .setIcon(R.drawable.star_outline)
+                    }
+                }
+            }
+        }
+
 
         lifecycleScope.launch {
-            viewModel.candidate.collect { candidate ->
-                if (candidate != null) {
-                    setCandidateData(candidate)
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.candidate.collect { candidate ->
+                    if (candidate != null) {
+                        setCandidateData(candidate)
 
-                    setUpDeleteButton(candidate)
+                        setUpDeleteButton(candidate)
 
-                    /*setUpdateButton()
+                        /*setUpdateButton()*/
 
-                    setUpFavoriteButton()*/
+                        setUpFavoriteButton(candidate)
+                    }
                 }
             }
         }
     }
 
-    private fun setUpFavoriteButton() {
-        TODO("Not yet implemented")
+    private fun setUpFavoriteButton(candidate: Candidate) {
+        binding.topAppBar.menu.findItem(R.id.favorite).setOnMenuItemClickListener {
+            viewModel.toggleFavorite(candidate)
+            binding.topAppBar.menu.findItem(R.id.favorite).setIcon(R.drawable.star_yellow)
+
+
+            true
+        }
     }
 
     private fun setUpdateButton() {

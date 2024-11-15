@@ -58,4 +58,13 @@ class FavoriteRepository(private val favoriteDao: FavoriteDao) {
             null
         }
     }
+
+    // Delete a favorite by candidate ID
+    suspend fun deleteFavoriteById(candidateId: Long) {
+        try {
+            favoriteDao.deleteFavoriteById(candidateId)
+        } catch (e: Exception) {
+            Log.d("DatabaseError", "Error while deleting favorite by ID", e)
+        }
+    }
 }
