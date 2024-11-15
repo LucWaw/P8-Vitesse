@@ -3,7 +3,6 @@ package com.openclassrooms.vitesse.ui.home
 import android.annotation.SuppressLint
 import android.os.Build
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
@@ -11,7 +10,7 @@ import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.openclassrooms.vitesse.R
+import com.openclassrooms.vitesse.databinding.ItemCandidateBinding
 import com.openclassrooms.vitesse.domain.model.Candidate
 
 class CandidateAdapter() :
@@ -19,23 +18,20 @@ class CandidateAdapter() :
         DIFF_CALLBACK
     ) {
 
-
-    inner class CandidateViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var name:TextView
-        var notes:TextView
-        var image: ImageView
-        
-        init {
-            name = itemView.findViewById(R.id.name)
-            notes = itemView.findViewById(R.id.notes)
-            image = itemView.findViewById(R.id.imageView)
-        }
+    inner class CandidateViewHolder(binding: ItemCandidateBinding) : RecyclerView.ViewHolder(binding.root) {
+        var name:TextView = binding.name
+        var notes:TextView = binding.notes
+        var image: ImageView = binding.imageView
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CandidateViewHolder {
-        val itemView: View =
-            LayoutInflater.from(parent.context).inflate(R.layout.item_candidate, parent, false)
-        return CandidateViewHolder(itemView)    }
+        val binding = ItemCandidateBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
+        return CandidateViewHolder(binding)
+    }
 
     @SuppressLint("SetTextI18n")//No need translation
     @RequiresApi(Build.VERSION_CODES.O)
