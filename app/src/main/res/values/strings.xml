@@ -30,4 +30,8 @@
     <string name="birthday">Anniversaire</string>
     <string name="salaryNeed">Prétentions salariales</string>
     <string name="page_Detail_title">Details du candidat</string>
+    <string name="deleteDialogTitle">Suppression</string>
+    <string name="deleteDialogMessage">Etes-vous sûr de vouloir supprimer ce candidat? Cette action est irréversible.</string>
+    <string name="declineDeleteDialog">Annuler</string>
+    <string name="acceptDeleteDialog">Confirmer</string>
 </resources>

@@ -30,4 +30,10 @@ class DetailViewModel @Inject constructor(private val candidateRepository: Candi
         }
 
     }
+
+    fun deleteCandidate(candidate: Candidate) {
+        viewModelScope.launch(Dispatchers.IO) {
+            candidateRepository.deleteCandidate(candidate)
+        }
+    }
 }

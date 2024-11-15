@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.openclassrooms.vitesse.R
 import com.openclassrooms.vitesse.databinding.DetailCandidateBinding
 import com.openclassrooms.vitesse.domain.model.Candidate
 import dagger.hilt.android.AndroidEntryPoint
@@ -50,16 +52,51 @@ class DetailScreen : AppCompatActivity() {
 
         binding.notesValue.makeScrollableInsideScrollView()
 
+        binding.topAppBar.setNavigationOnClickListener {
+            finish()
+        }
 
 
         lifecycleScope.launch {
             viewModel.candidate.collect { candidate ->
                 if (candidate != null) {
                     setCandidateData(candidate)
+
+                    setUpDeleteButton(candidate)
+
+                    /*setUpdateButton()
+
+                    setUpFavoriteButton()*/
                 }
             }
         }
     }
+
+    private fun setUpFavoriteButton() {
+        TODO("Not yet implemented")
+    }
+
+    private fun setUpdateButton() {
+        TODO("Not yet implemented")
+    }
+
+    private fun setUpDeleteButton(candidate: Candidate) {
+        binding.topAppBar.menu.findItem(R.id.delete).setOnMenuItemClickListener {
+            MaterialAlertDialogBuilder(this)
+                .setTitle(resources.getString(R.string.deleteDialogTitle))
+                .setMessage(resources.getString(R.string.deleteDialogMessage))
+                .setNegativeButton(resources.getString(R.string.declineDeleteDialog)) { dialog, which ->
+                    dialog.dismiss()
+                }
+                .setPositiveButton(resources.getString(R.string.acceptDeleteDialog)) { dialog, which ->
+                    viewModel.deleteCandidate(candidate)
+                    finish()
+                }
+                .show()
+            true
+        }
+    }
+
 
     private fun TextView.makeScrollableInsideScrollView() {
         movementMethod = ScrollingMovementMethod()

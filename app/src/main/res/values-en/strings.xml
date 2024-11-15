@@ -31,4 +31,8 @@
     <string name="birthday">Birthday</string>
     <string name="salaryNeed">Expected Salary</string>
     <string name="page_Detail_title">Candidate details</string>
+    <string name="deleteDialogTitle">Deletion</string>
+    <string name="deleteDialogMessage">Are you sure you want to delete this candidate? This action cannot be undone.</string>
+    <string name="declineDeleteDialog">Cancel</string>
+    <string name="acceptDeleteDialog">Confirm</string>
 </resources>

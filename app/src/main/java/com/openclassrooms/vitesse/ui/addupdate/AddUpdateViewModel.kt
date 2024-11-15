@@ -11,9 +11,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AddUpdateViewModel @Inject constructor(private val candidateRepository: CandidateRepository) : ViewModel() {
-    fun addCandidate(Candidate: Candidate) {
+    fun addCandidate(candidate: Candidate) {
         viewModelScope.launch(Dispatchers.IO) {
-            candidateRepository.addCandidate(Candidate)
+            candidateRepository.addCandidate(candidate)
         }
     }
+
+
 }
