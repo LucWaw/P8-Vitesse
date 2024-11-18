@@ -49,6 +49,7 @@ class AddUpdateScreen : AppCompatActivity() {
         setEditCandidateFields(candidateId)
         setSaveCandidate(candidateId)
         setReturnBack()
+
     }
 
     private fun setEditCandidateFields(candidateId: Long) {
@@ -72,6 +73,8 @@ class AddUpdateScreen : AppCompatActivity() {
 
                         val birthday = candidate.birthday.formatAsBirthday(false)
                         binding.date.setText(birthday)
+
+                        selectedDate = birthday
                     }
                 }
             }
@@ -172,13 +175,13 @@ class AddUpdateScreen : AppCompatActivity() {
 
     private fun setUpDialogBirthDate() {
         binding.date.setOnClickListener {
-            Log.d("AddUpdateScreen", "Date picker clicked")
 
             var date: LocalDate? = null
 
             if (selectedDate != "jj/mm/aaaa") {
                 try {
                     date = LocalDate.parse(selectedDate, DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+                    Log.d("AddUpdateScreen", "Date parsed: $date")
                 } catch (e: Exception) {
                     Log.d("AddUpdateScreen", "Invalid date format, use current date")
                 }
@@ -189,7 +192,7 @@ class AddUpdateScreen : AppCompatActivity() {
             }
 
             val year = date!!.year
-            val month = date.monthValue - 1  // Les mois dans le calendrier commencent à 0
+            val month = date.monthValue - 1  // Month is 0-based
             val day = date.dayOfMonth
 
             val datePickerDialog = DatePickerDialog(
