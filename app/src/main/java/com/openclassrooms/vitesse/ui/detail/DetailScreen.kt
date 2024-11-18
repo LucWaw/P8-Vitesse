@@ -42,7 +42,7 @@ class DetailScreen : AppCompatActivity() {
 
         //retrieve data from put extra
         val candidateId = intent.getLongExtra(CANDIDATE_ID, 0)
-        viewModel.loadCandidate(candidateId)
+        viewModel.loadStateFlows(candidateId)
 
         ViewCompat.setOnApplyWindowInsetsListener(binding.detailCandidate) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -112,7 +112,7 @@ class DetailScreen : AppCompatActivity() {
                 .setNegativeButton(resources.getString(R.string.declineDeleteDialog)) { dialog, which ->
                     dialog.dismiss()
                 }
-                .setPositiveButton(resources.getString(R.string.acceptDeleteDialog)) { dialog, which ->
+                .setPositiveButton(resources.getString(R.string.acceptDeleteDialog)) { _, _ ->
                     viewModel.deleteCandidate(candidate)
                     finish()
                 }

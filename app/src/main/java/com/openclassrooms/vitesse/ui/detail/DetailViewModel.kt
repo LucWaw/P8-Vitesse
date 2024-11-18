@@ -16,31 +16,32 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class DetailViewModel @Inject constructor(private val candidateRepository: CandidateRepository, private val favoriteRepository: FavoriteRepository) : ViewModel()
-{
+class DetailViewModel @Inject constructor(
+    private val candidateRepository: CandidateRepository,
+    private val favoriteRepository: FavoriteRepository
+) : ViewModel() {
     //candidate stateflow
     private val _candidate = MutableStateFlow<Candidate?>(null)
-    val candidate : StateFlow<Candidate?> = _candidate.asStateFlow()
-
+    val candidate: StateFlow<Candidate?> = _candidate.asStateFlow()
+    //favorite stateflow
     private val isFavorite = MutableStateFlow(false)
-    val isFavoriteFlow : StateFlow<Boolean> = isFavorite.asStateFlow()
+    val isFavoriteFlow: StateFlow<Boolean> = isFavorite.asStateFlow()
 
 
 
-
-    fun loadCandidate(id : Long) {
+    fun loadStateFlows(id: Long) {
         viewModelScope.launch(Dispatchers.IO) {
-            //update
-            _candidate.update {
-
-                candidateRepository.getCandidateById(id) }.run {
-                changeUpdateFavorite(_candidate.value?: return@launch)
-
-            }
-            //check if candidate is favorite
-
+            loadCandidate(id)
+            loadFavorite()
         }
+    }
 
+    private suspend fun loadFavorite() {
+        _candidate.value?.let { updateIsFavorite(it) }
+    }
+
+    private suspend fun loadCandidate(id: Long) {
+        _candidate.update { candidateRepository.getCandidateById(id) }
     }
 
     fun deleteCandidate(candidate: Candidate) {
@@ -49,38 +50,21 @@ class DetailViewModel @Inject constructor(private val candidateRepository: Candi
         }
     }
 
-    private suspend fun changeUpdateFavorite(candidate: Candidate) {
-            val favorite = favoriteRepository.getFavoriteById(candidate.id?: return)
-            if (favorite != null) {
-                isFavorite.update {
-                    true
-                }
-            } else {
-                isFavorite.update {
-                    false
-                }
-            }
+    private suspend fun updateIsFavorite(candidate: Candidate) {
+        isFavorite.update { favoriteRepository.getFavoriteById(candidate.id ?: return) != null }
     }
 
     fun toggleFavorite(candidate: Candidate) {
-        //check if candidate is already favorite
         viewModelScope.launch(Dispatchers.IO) {
-            val favorite = favoriteRepository.getFavoriteById(candidate.id?: return@launch)
+            val favorite = favoriteRepository.getFavoriteById(candidate.id ?: return@launch)
             if (favorite != null) {
+                //If the candidate is already a favorite, delete it
                 favoriteRepository.deleteFavoriteById(candidate.id)
-                isFavorite.update {
-                    false
-                }
             } else {
-                viewModelScope.launch(Dispatchers.IO) {
-                    favoriteRepository.addFavorite(Favorite(candidate.id))
-                }
-                isFavorite.update {
-                    true
-                }
+                //If the candidate is not a favorite, add it
+                favoriteRepository.addFavorite(Favorite(candidate.id))
             }
+            updateIsFavorite(candidate)
         }
-
-
     }
 }
