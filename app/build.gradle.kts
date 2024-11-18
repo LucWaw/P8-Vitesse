@@ -62,8 +62,19 @@ dependencies {
     ksp(libs.hilt.compiler)
     implementation(libs.hilt)
 
+
+    // Moshi JSON Library
+    implementation(libs.moshi.kotlin)
+
+    // Retrofit for Network Requests
+    implementation(libs.retrofit)
+    implementation(libs.logging.interceptor)
+    implementation(libs.converter.moshi)
+
+
     implementation(libs.androidx.fragment.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
+
 
 
     implementation(libs.androidx.core.ktx)

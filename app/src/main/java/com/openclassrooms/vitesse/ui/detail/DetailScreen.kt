@@ -19,6 +19,8 @@ import com.openclassrooms.vitesse.databinding.DetailCandidateBinding
 import com.openclassrooms.vitesse.domain.model.Candidate
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import java.math.BigDecimal
+import java.math.RoundingMode
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.Period
@@ -43,6 +45,7 @@ class DetailScreen : AppCompatActivity() {
         //retrieve data from put extra
         val candidateId = intent.getLongExtra(CANDIDATE_ID, 0)
         viewModel.loadStateFlows(candidateId)
+        viewModel.fetchPoundCurrency()
 
         ViewCompat.setOnApplyWindowInsetsListener(binding.detailCandidate) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -109,7 +112,7 @@ class DetailScreen : AppCompatActivity() {
             MaterialAlertDialogBuilder(this)
                 .setTitle(resources.getString(R.string.deleteDialogTitle))
                 .setMessage(resources.getString(R.string.deleteDialogMessage))
-                .setNegativeButton(resources.getString(R.string.declineDeleteDialog)) { dialog, which ->
+                .setNegativeButton(resources.getString(R.string.declineDeleteDialog)) { dialog, _ ->
                     dialog.dismiss()
                 }
                 .setPositiveButton(resources.getString(R.string.acceptDeleteDialog)) { _, _ ->
@@ -145,11 +148,29 @@ class DetailScreen : AppCompatActivity() {
 
         binding.topAppBar.title = candidate.firstName + " " + candidate.lastName.uppercase()
         binding.aboutAge.text = formatBirthday(candidate.birthday)
-        @SuppressLint("SetTextI18n")// No need tranlation
+        @SuppressLint("SetTextI18n")// No need translation
         binding.eurosSalary.text = candidate.salaryClaim.toString() + " €"
-        //TODO API FOR binding.poundSalary
+
+        updatePoundValue(candidate)
+
         binding.notesValue.text = candidate.notes
 
+    }
+
+    @SuppressLint("SetTextI18n")// No need translation
+    private fun updatePoundValue(candidate: Candidate) {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.poundCurrency.collect { poundCurrency ->
+                    if (poundCurrency != null) {
+                        val poundValue = candidate.salaryClaim * poundCurrency.gbpValue
+                        val roundedValue = BigDecimal(poundValue).setScale(2, RoundingMode.HALF_UP).toDouble()
+
+                        binding.poundSalary.text = "$roundedValue £"
+                    }
+                }
+            }
+        }
     }
 
     private fun formatBirthday(birthday: LocalDateTime): String {
