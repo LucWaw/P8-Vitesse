@@ -118,23 +118,23 @@ class AddUpdateScreen : AppCompatActivity() {
 
             binding.filledButton.setOnClickListener {
                 if (binding.firstName.text.toString().isEmpty()) {
-                    binding.firstName.error = getString(R.string.mandatory_field)
+                    binding.firstNameInputLayout.error = getString(R.string.mandatory_field)
                     return@setOnClickListener
                 }
                 if (binding.lastName.text.toString().isEmpty()) {
-                    binding.lastName.error = getString(R.string.mandatory_field)
-                    return@setOnClickListener
-                }
-                if (binding.email.text.toString().isEmpty()) {
-                    binding.email.error = getString(R.string.mandatory_field)
+                    binding.lastNameInputLayout.error = getString(R.string.mandatory_field)
                     return@setOnClickListener
                 }
                 if (binding.phone.text.toString().isEmpty()) {
-                    binding.phone.error = getString(R.string.mandatory_field)
+                    binding.phoneInputLayout.error = getString(R.string.mandatory_field)
                     return@setOnClickListener
                 }
+                if (binding.email.text.toString().isEmpty()) {
+                binding.emailInputLayout.error = getString(R.string.mandatory_field)
+                return@setOnClickListener
+                }
                 if (!binding.email.text.toString().isValidEmail()) {
-                    binding.email.error = getString(R.string.invalid_format)
+                    binding.emailInputLayout.error = getString(R.string.invalid_format)
                     return@setOnClickListener
                 }
 
@@ -152,7 +152,7 @@ class AddUpdateScreen : AppCompatActivity() {
 
                 selectedDate = binding.date.text.toString()
                 if (selectedDate == "jj/mm/aaaa") {
-                    binding.date.error = getString(R.string.mandatory_field)
+                    binding.dateInputLayout.error = getString(R.string.mandatory_field)
                     return@setOnClickListener
                 }
 

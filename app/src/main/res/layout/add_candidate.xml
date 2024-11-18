@@ -75,7 +75,6 @@
                     android:id="@+id/first_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="45dp"
                     tools:text="John" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -86,6 +85,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="45dp"
                 android:layout_marginEnd="24dp"
                 android:layout_marginBottom="45dp"
                 android:hint="@string/lastName"
@@ -98,7 +98,6 @@
                     android:id="@+id/last_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="45dp"
                     tools:text="Doe" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -124,6 +123,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="18dp"
                 android:layout_marginEnd="24dp"
+                android:layout_marginTop="45dp"
                 android:hint="@string/phone"
                 app:errorEnabled="true"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -134,7 +134,6 @@
                     android:id="@+id/phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="45dp"
                     android:inputType="number"
                     tools:text="Doe" />
 
@@ -160,6 +159,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="18dp"
                 android:layout_marginEnd="24dp"
+                android:layout_marginTop="45dp"
                 android:hint="@string/email"
                 app:errorEnabled="true"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -170,7 +170,6 @@
                     android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="45dp"
                     android:inputType="textEmailAddress"
                     tools:text="Doe" />
 
