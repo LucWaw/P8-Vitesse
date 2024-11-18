@@ -225,16 +225,15 @@ class DetailScreen : AppCompatActivity() {
     }
 }
 
-fun LocalDateTime.formatAsBirthday(addAge : Boolean): String {
+fun LocalDate.formatAsBirthday(addAge : Boolean): String {
     // Formater la date
     val dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
     val formattedDate = this.format(dateFormatter)
 
     // Calculer l'âge
     return if (addAge){
-        val birthDate = this.toLocalDate()
         val currentDate = LocalDate.now()
-        val age = Period.between(birthDate, currentDate).years
+        val age = Period.between(this, currentDate).years
 
         // Construire le résultat final
         "$formattedDate ($age ans)"

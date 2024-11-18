@@ -21,7 +21,7 @@ import com.openclassrooms.vitesse.domain.model.Candidate
 import com.openclassrooms.vitesse.ui.detail.formatAsBirthday
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import java.time.LocalDateTime
+import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Calendar
 
@@ -34,6 +34,8 @@ class AddUpdateScreen : AppCompatActivity() {
     private val viewModel: AddUpdateViewModel by viewModels()
 
     private var selectedDate: String = "jj/mm/aaaa"
+
+    private var image : Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,6 +68,7 @@ class AddUpdateScreen : AppCompatActivity() {
                         binding.notes.setText(candidate.notes)
                         if (candidate.image.toString() != "") {
                             binding.image.setImageURI(candidate.image)
+                            image = candidate.image
                         }
 
                         val birthday = candidate.birthday.formatAsBirthday(false)
@@ -86,7 +89,7 @@ class AddUpdateScreen : AppCompatActivity() {
         private fun setSaveCandidate(candidateID : Long) {
             setUpDialogBirthDate()
 
-            var image: Uri? = null
+
 
             // Registers a photo picker activity launcher in single-select mode.
             val pickMedia =
@@ -145,7 +148,7 @@ class AddUpdateScreen : AppCompatActivity() {
                 val notes =
                     binding.notes.text.toString().ifEmpty { "" }
 
-
+                selectedDate = binding.date.text.toString()
                 if (selectedDate == "jj/mm/aaaa") {
                     binding.date.error = getString(R.string.mandatory_field)
                     return@setOnClickListener
@@ -157,7 +160,7 @@ class AddUpdateScreen : AppCompatActivity() {
                     lastName = binding.lastName.text.toString(),
                     email = binding.email.text.toString(),
                     phoneNumber = binding.phone.text.toString(),
-                    birthday = LocalDateTime.parse(selectedDate, DateTimeFormatter.ofPattern("dd/MM/yyyy")),
+                    birthday = LocalDate.parse(selectedDate, DateTimeFormatter.ofPattern("dd/MM/yyyy")),
                     salaryClaim = salary,
                     notes = notes,
                     image = image ?: Uri.parse("")
@@ -169,7 +172,7 @@ class AddUpdateScreen : AppCompatActivity() {
         }
 
     private fun setUpDialogBirthDate() {
-        binding.datePicker.setOnClickListener{
+        binding.date.setOnClickListener{
             Log.d("AddUpdateScreen", "Date picker clicked")
             val calendar = Calendar.getInstance()
             val year = calendar.get(Calendar.YEAR)
@@ -179,8 +182,8 @@ class AddUpdateScreen : AppCompatActivity() {
             val datePickerDialog = DatePickerDialog(
                 this,
                 { _, selectedYear, selectedMonth, selectedDay ->
-                    val selectedDateTime = LocalDateTime.of(
-                        selectedYear, selectedMonth + 1, selectedDay, 0, 0
+                    val selectedDateTime = LocalDate.of(
+                        selectedYear, selectedMonth + 1, selectedDay
                     )
                     val formattedDate = selectedDateTime.formatAsBirthday(false)
                     binding.date.setText(formattedDate)

@@ -2,6 +2,7 @@ package com.openclassrooms.vitesse.domain.model
 
 import android.net.Uri
 import com.openclassrooms.vitesse.data.entity.CandidateDto
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.ZoneOffset
 
@@ -11,7 +12,7 @@ data class Candidate(
     val lastName: String,
     val phoneNumber: String,
     val email: String,
-    val birthday: LocalDateTime,
+    val birthday: LocalDate,
     val salaryClaim: Double,
     val notes: String,
     val image: Uri
@@ -24,7 +25,7 @@ data class Candidate(
             lastName = lastName,
             phoneNumber = phoneNumber,
             email = email,
-            birthday = birthday.toEpochSecond(ZoneOffset.UTC),
+            birthday = birthday.toEpochDay(),
             salaryClaim = salaryClaim,
             notes = notes,
             image = image.toString()
@@ -40,7 +41,7 @@ data class Candidate(
                 lastName = candidateDto.lastName,
                 phoneNumber = candidateDto.phoneNumber,
                 email = candidateDto.email,
-                birthday = LocalDateTime.ofEpochSecond(candidateDto.birthday, 0, ZoneOffset.UTC),
+                birthday = LocalDate.ofEpochDay(candidateDto.birthday),
                 salaryClaim = candidateDto.salaryClaim,
                 notes = candidateDto.notes,
                 image = Uri.parse(candidateDto.image)
