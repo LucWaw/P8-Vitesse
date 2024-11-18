@@ -37,4 +37,6 @@
     <string name="acceptDeleteDialog">Confirm</string>
     <string name="edit_candidate">Modify a candidate</string>
     <string name="boutonAddDescription">New candidate</string>
+    <string name="enterADate">Enter a date</string>
+    <string name="selectADate">Delect a date</string>
 </resources>

@@ -194,7 +194,7 @@ class DetailScreen : AppCompatActivity() {
         }
 
         binding.topAppBar.title = candidate.firstName + " " + candidate.lastName.uppercase()
-        binding.aboutAge.text = formatBirthday(candidate.birthday)
+        binding.aboutAge.text = candidate.birthday.formatAsBirthday(true)
         @SuppressLint("SetTextI18n")// No need translation
         binding.eurosSalary.text = candidate.salaryClaim.toString() + " €"
 
@@ -220,21 +220,26 @@ class DetailScreen : AppCompatActivity() {
         }
     }
 
-    private fun formatBirthday(birthday: LocalDateTime): String {
-        // Formater la date
-        val dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
-        val formattedDate = birthday.format(dateFormatter)
-
-        // Calculer l'âge
-        val birthDate = birthday.toLocalDate()
-        val currentDate = LocalDate.now()
-        val age = Period.between(birthDate, currentDate).years
-
-        // Construire le résultat final
-        return "$formattedDate ($age ans)"
-    }
-
     companion object {
         const val CANDIDATE_ID_FOR_DETAIL = "CANDIDATE_ID"
     }
 }
+
+fun LocalDateTime.formatAsBirthday(addAge : Boolean): String {
+    // Formater la date
+    val dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+    val formattedDate = this.format(dateFormatter)
+
+    // Calculer l'âge
+    return if (addAge){
+        val birthDate = this.toLocalDate()
+        val currentDate = LocalDate.now()
+        val age = Period.between(birthDate, currentDate).years
+
+        // Construire le résultat final
+        "$formattedDate ($age ans)"
+    }else formattedDate
+
+}
+
+
