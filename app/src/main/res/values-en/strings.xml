@@ -36,4 +36,5 @@
     <string name="declineDeleteDialog">Cancel</string>
     <string name="acceptDeleteDialog">Confirm</string>
     <string name="edit_candidate">Modify a candidate</string>
+    <string name="boutonAddDescription">New candidate</string>
 </resources>

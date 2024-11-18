@@ -56,7 +56,7 @@ class FavoriteFragment  : Fragment(), CandidateAdapter.OnCandidateClickListener 
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
         observeCandidates()
-        activityBinding.loading.visibility = View.GONE
+        binding.loading.visibility = View.VISIBLE
 
     }
 
@@ -66,9 +66,11 @@ class FavoriteFragment  : Fragment(), CandidateAdapter.OnCandidateClickListener 
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.favoritesFlow.collect { candidates ->
                 if (candidates.isEmpty()) {
-                    activityBinding.noData.visibility = View.VISIBLE
+                    binding.noData.visibility = View.VISIBLE
+                    binding.loading.visibility = View.GONE
                 } else {
-                    activityBinding.noData.visibility = View.GONE
+                    binding.noData.visibility = View.GONE
+                    binding.loading.visibility = View.GONE
                 }
             }
         }
@@ -79,9 +81,11 @@ class FavoriteFragment  : Fragment(), CandidateAdapter.OnCandidateClickListener 
             viewModel.favoritesFlow.collect { candidates ->
                 candidateAdapter.submitList(candidates)
                 if (candidates.isEmpty()) {
-                    activityBinding.noData.visibility = View.VISIBLE
+                    binding.noData.visibility = View.VISIBLE
+                    binding.loading.visibility = View.GONE
                 } else {
-                    activityBinding.noData.visibility = View.GONE
+                    binding.noData.visibility = View.GONE
+                    binding.loading.visibility = View.GONE
                 }
             }
         }

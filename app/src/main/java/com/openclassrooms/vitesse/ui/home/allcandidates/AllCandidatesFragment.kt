@@ -1,6 +1,5 @@
 package com.openclassrooms.vitesse.ui.home.allcandidates
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,11 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.openclassrooms.vitesse.R
-import com.openclassrooms.vitesse.databinding.ActivityMainBinding
 import com.openclassrooms.vitesse.databinding.RecyclerCandidatesBinding
 import com.openclassrooms.vitesse.domain.model.Candidate
-import com.openclassrooms.vitesse.ui.MainActivity
 import com.openclassrooms.vitesse.ui.detail.DetailScreen
 import com.openclassrooms.vitesse.ui.home.CandidateAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,7 +21,6 @@ class AllItemsFragment : Fragment(), CandidateAdapter.OnCandidateClickListener {
     private var _binding: RecyclerCandidatesBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var activityBinding: ActivityMainBinding
 
 
     private val viewModel: AllCandidatesViewModel by viewModels()
@@ -45,12 +40,6 @@ class AllItemsFragment : Fragment(), CandidateAdapter.OnCandidateClickListener {
         return binding.root
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is MainActivity) {
-            activityBinding = ActivityMainBinding.bind(context.findViewById(R.id.main))
-        }
-    }
 
     override fun onResume() {
         super.onResume()
@@ -58,19 +47,22 @@ class AllItemsFragment : Fragment(), CandidateAdapter.OnCandidateClickListener {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.candidatesFlow.collect { candidates ->
                 if (candidates.isEmpty()) {
-                    activityBinding.noData.visibility = View.VISIBLE
+                    binding.noData.visibility = View.VISIBLE
+                    binding.loading.visibility = View.GONE
                 } else {
-                    activityBinding.noData.visibility = View.GONE
+                    binding.noData.visibility = View.GONE
+                    binding.loading.visibility = View.GONE
                 }
             }
         }
+        context?.let { super.onAttach(it) }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.loading.visibility = View.VISIBLE
         setupRecyclerView()
         observeCandidates()
-        activityBinding.loading.visibility = View.GONE
 
 
     }
@@ -81,9 +73,11 @@ class AllItemsFragment : Fragment(), CandidateAdapter.OnCandidateClickListener {
             viewModel.candidatesFlow.collect { candidates ->
                 candidateAdapter.submitList(candidates)
                 if (candidates.isEmpty()) {
-                    activityBinding.noData.visibility = View.VISIBLE
+                    binding.noData.visibility = View.VISIBLE
+                    binding.loading.visibility = View.GONE
                 } else {
-                    activityBinding.noData.visibility = View.GONE
+                    binding.noData.visibility = View.GONE
+                    binding.loading.visibility = View.GONE
                 }
             }
         }

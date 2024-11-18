@@ -46,7 +46,6 @@ class MainActivity : AppCompatActivity(), CandidateAdapter.OnCandidateClickListe
         setContentView(binding.root)
         setUpFab()
 
-        binding.loading.visibility = View.VISIBLE
 
         setUpTabLayout()
 

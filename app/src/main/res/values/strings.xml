@@ -35,4 +35,5 @@
     <string name="declineDeleteDialog">Annuler</string>
     <string name="acceptDeleteDialog">Confirmer</string>
     <string name="edit_candidate">Modifier un candidat</string>
+    <string name="boutonAddDescription">Nouveau candidat</string>
 </resources>
