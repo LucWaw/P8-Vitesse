@@ -1,11 +1,14 @@
 package com.openclassrooms.vitesse.ui.detail
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.openclassrooms.vitesse.data.api.repository.CurrencyRepository
 import com.openclassrooms.vitesse.data.repository.CandidateRepository
 import com.openclassrooms.vitesse.data.repository.FavoriteRepository
 import com.openclassrooms.vitesse.domain.model.Candidate
 import com.openclassrooms.vitesse.domain.model.Favorite
+import com.openclassrooms.vitesse.domain.model.PoundCurrency
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,7 +21,8 @@ import javax.inject.Inject
 @HiltViewModel
 class DetailViewModel @Inject constructor(
     private val candidateRepository: CandidateRepository,
-    private val favoriteRepository: FavoriteRepository
+    private val favoriteRepository: FavoriteRepository,
+    private val currencyRepository: CurrencyRepository
 ) : ViewModel() {
     //candidate stateflow
     private val _candidate = MutableStateFlow<Candidate?>(null)
@@ -26,7 +30,9 @@ class DetailViewModel @Inject constructor(
     //favorite stateflow
     private val isFavorite = MutableStateFlow(false)
     val isFavoriteFlow: StateFlow<Boolean> = isFavorite.asStateFlow()
-
+    //currency stateflow
+    private val _poundCurrency = MutableStateFlow<PoundCurrency?>(null)
+    val poundCurrency: StateFlow<PoundCurrency?> = _poundCurrency
 
 
     fun loadStateFlows(id: Long) {
@@ -65,6 +71,16 @@ class DetailViewModel @Inject constructor(
                 favoriteRepository.addFavorite(Favorite(candidate.id))
             }
             updateIsFavorite(candidate)
+        }
+    }
+
+    fun fetchPoundCurrency() {
+        viewModelScope.launch {
+            try {
+                _poundCurrency.value = currencyRepository.getPoundCurrency()
+            } catch (e: Exception) {
+                Log.d("DetailViewModel", "Error fetching pound currency: $e")
+            }
         }
     }
 }

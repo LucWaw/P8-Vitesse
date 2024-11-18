@@ -43,7 +43,7 @@ class FavoriteRepository(private val favoriteDao: FavoriteDao) {
             val favoriteDto = favoriteDao.getFavoriteById(candidateId)
             Favorite.fromDto(favoriteDto)
         } catch (e: Exception) {
-            Log.d("DatabaseError", "Error while getting favorite by ID", e)
+            Log.d("DatabaseError", "Candidate is not a favorite")
             null
         }
     }

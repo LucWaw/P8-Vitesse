@@ -76,7 +76,6 @@ class AllItemsFragment : Fragment(), CandidateAdapter.OnCandidateClickListener {
     }
 
 
-
     private fun observeCandidates() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.candidatesFlow.collect { candidates ->
