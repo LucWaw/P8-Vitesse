@@ -1,14 +1,14 @@
 package com.openclassrooms.vitesse.data.dao
 
 import androidx.room.Dao
-import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Upsert
 import com.openclassrooms.vitesse.data.entity.CandidateDto
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CandidateDao {
-    @Insert
+    @Upsert
     suspend fun addCandidate(Candidate: CandidateDto): Long
 
 

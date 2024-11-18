@@ -1,6 +1,7 @@
 package com.openclassrooms.vitesse.ui.detail
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
 import android.view.MotionEvent
@@ -17,6 +18,8 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.openclassrooms.vitesse.R
 import com.openclassrooms.vitesse.databinding.DetailCandidateBinding
 import com.openclassrooms.vitesse.domain.model.Candidate
+import com.openclassrooms.vitesse.ui.addupdate.AddUpdateScreen
+import com.openclassrooms.vitesse.ui.addupdate.AddUpdateScreen.Companion.CANDIDATE_ID_FOR_ADD
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.math.BigDecimal
@@ -43,8 +46,8 @@ class DetailScreen : AppCompatActivity() {
         setContentView(binding.root)
 
         //retrieve data from put extra
-        val candidateId = intent.getLongExtra(CANDIDATE_ID, 0)
-        viewModel.loadStateFlows(candidateId)
+        val candidateId = intent.getLongExtra(CANDIDATE_ID_FOR_DETAIL, 0)
+        //viewModel.loadStateFlows(candidateId)
         viewModel.fetchPoundCurrency()
 
         ViewCompat.setOnApplyWindowInsetsListener(binding.detailCandidate) { v, insets ->
@@ -77,14 +80,16 @@ class DetailScreen : AppCompatActivity() {
 
 
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
+            repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                viewModel.loadStateFlows(candidateId)
+
                 viewModel.candidate.collect { candidate ->
                     if (candidate != null) {
                         setCandidateData(candidate)
 
                         setUpDeleteButton(candidate)
 
-                        /*setUpdateButton()*/
+                        setUpdateButton(candidate)
 
                         setUpFavoriteButton(candidate)
                     }
@@ -103,8 +108,14 @@ class DetailScreen : AppCompatActivity() {
         }
     }
 
-    private fun setUpdateButton() {
-        TODO("Not yet implemented")
+    private fun setUpdateButton(candidate: Candidate) {
+        val intent = Intent(this, AddUpdateScreen::class.java).apply {
+            putExtra(CANDIDATE_ID_FOR_ADD, candidate.id)
+        }
+        binding.topAppBar.menu.findItem(R.id.edit).setOnMenuItemClickListener {
+            startActivity(intent)
+            true
+        }
     }
 
     private fun setUpDeleteButton(candidate: Candidate) {
@@ -188,6 +199,6 @@ class DetailScreen : AppCompatActivity() {
     }
 
     companion object {
-        const val CANDIDATE_ID = "CANDIDATE_ID"
+        const val CANDIDATE_ID_FOR_DETAIL = "CANDIDATE_ID"
     }
 }

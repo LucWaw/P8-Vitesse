@@ -35,4 +35,5 @@
     <string name="deleteDialogMessage">Are you sure you want to delete this candidate? This action cannot be undone.</string>
     <string name="declineDeleteDialog">Cancel</string>
     <string name="acceptDeleteDialog">Confirm</string>
+    <string name="edit_candidate">Modify a candidate</string>
 </resources>

@@ -142,7 +142,7 @@ class MainActivity : AppCompatActivity(), CandidateAdapter.OnCandidateClickListe
      */
     override fun onCandidateClick(candidate: Candidate) {
         val intent = Intent(this, DetailScreen::class.java).apply {
-            putExtra(DetailScreen.CANDIDATE_ID, candidate.id)
+            putExtra(DetailScreen.CANDIDATE_ID_FOR_DETAIL, candidate.id)
 
         }
 

@@ -95,7 +95,7 @@ class FavoriteFragment  : Fragment(), CandidateAdapter.OnCandidateClickListener 
 
     override fun onCandidateClick(candidate: Candidate) {
         val intent = Intent(this.context, DetailScreen::class.java).apply {
-            putExtra(DetailScreen.CANDIDATE_ID, candidate.id)
+            putExtra(DetailScreen.CANDIDATE_ID_FOR_DETAIL, candidate.id)
 
         }
 

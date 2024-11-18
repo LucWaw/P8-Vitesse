@@ -34,4 +34,5 @@
     <string name="deleteDialogMessage">Etes-vous sûr de vouloir supprimer ce candidat? Cette action est irréversible.</string>
     <string name="declineDeleteDialog">Annuler</string>
     <string name="acceptDeleteDialog">Confirmer</string>
+    <string name="edit_candidate">Modifier un candidat</string>
 </resources>
