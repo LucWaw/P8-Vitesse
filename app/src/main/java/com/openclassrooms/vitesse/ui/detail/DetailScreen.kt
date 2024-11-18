@@ -2,6 +2,7 @@ package com.openclassrooms.vitesse.ui.detail
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
 import android.view.MotionEvent
@@ -92,9 +93,44 @@ class DetailScreen : AppCompatActivity() {
                         setUpdateButton(candidate)
 
                         setUpFavoriteButton(candidate)
+
+                        setUpActionButtons(candidate)
                     }
                 }
             }
+        }
+    }
+
+    private fun setUpActionButtons(candidate: Candidate) {
+        setUpCallButton(candidate.phoneNumber)
+
+        setUpEmailButton(candidate.email)
+
+        setUpSmsButton(candidate.phoneNumber)
+
+    }
+
+    private fun setUpSmsButton(candidatePhoneNumber: String) {
+        binding.smsIconButton.setOnClickListener {
+            val smsUri = Uri.parse("smsto:$candidatePhoneNumber")
+            val smsIntent = Intent(Intent.ACTION_VIEW, smsUri)
+            startActivity(smsIntent)
+        }
+    }
+
+    private fun setUpEmailButton(candidateEmail: String) {
+        binding.emailIconButton.setOnClickListener {
+            val emailIntent = Intent(Intent.ACTION_SENDTO).apply {
+                data = Uri.parse("mailto:$candidateEmail") // Uri pour envoyer un email
+            }
+            startActivity(emailIntent)
+        }
+    }
+
+    private fun setUpCallButton(candidatePhoneNumber: String) {
+        binding.callIconButton.setOnClickListener {
+            val dialIntent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:$candidatePhoneNumber"))
+            startActivity(dialIntent)
         }
     }
 
