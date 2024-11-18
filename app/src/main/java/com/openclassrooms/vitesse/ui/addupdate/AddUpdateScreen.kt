@@ -23,7 +23,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
-import java.util.Calendar
 
 @AndroidEntryPoint
 class AddUpdateScreen : AppCompatActivity() {
@@ -172,12 +171,26 @@ class AddUpdateScreen : AppCompatActivity() {
         }
 
     private fun setUpDialogBirthDate() {
-        binding.date.setOnClickListener{
+        binding.date.setOnClickListener {
             Log.d("AddUpdateScreen", "Date picker clicked")
-            val calendar = Calendar.getInstance()
-            val year = calendar.get(Calendar.YEAR)
-            val month = calendar.get(Calendar.MONTH)
-            val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+            var date: LocalDate? = null
+
+            if (selectedDate != "jj/mm/aaaa") {
+                try {
+                    date = LocalDate.parse(selectedDate, DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+                } catch (e: Exception) {
+                    Log.d("AddUpdateScreen", "Invalid date format, use current date")
+                }
+            }
+
+            if (date == null) {
+                date = LocalDate.now()
+            }
+
+            val year = date!!.year
+            val month = date.monthValue - 1  // Les mois dans le calendrier commencent à 0
+            val day = date.dayOfMonth
 
             val datePickerDialog = DatePickerDialog(
                 this,
@@ -193,10 +206,9 @@ class AddUpdateScreen : AppCompatActivity() {
             )
 
             datePickerDialog.show()
-
         }
-
     }
+
 
     private fun CharSequence?.isValidEmail() =
             !isNullOrEmpty() && Patterns.EMAIL_ADDRESS.matcher(this).matches()
