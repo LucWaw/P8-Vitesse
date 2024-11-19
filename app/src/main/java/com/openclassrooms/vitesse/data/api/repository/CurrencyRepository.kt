@@ -5,7 +5,6 @@ import com.openclassrooms.vitesse.data.api.network.FallbackApi
 import com.openclassrooms.vitesse.domain.model.PoundCurrency
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import retrofit2.HttpException
 import javax.inject.Inject
 
 class CurrencyRepository @Inject constructor(
@@ -17,7 +16,7 @@ class CurrencyRepository @Inject constructor(
             try {
                 // Principal request
                 currencyApi.getCurrencies().toDomainModel()
-            } catch (e: HttpException) {
+            } catch (e: Exception) {
                 // In case of failure, fallback request
                 fallbackApi.getCurrencies().toDomainModel()
             }
