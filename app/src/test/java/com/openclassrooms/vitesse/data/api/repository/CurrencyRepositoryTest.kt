@@ -5,7 +5,7 @@ import com.openclassrooms.vitesse.data.api.network.FallbackApi
 import com.openclassrooms.vitesse.data.api.response.ResponseApiCurrency
 import com.openclassrooms.vitesse.domain.model.PoundCurrency
 import kotlinx.coroutines.test.runTest
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -31,10 +31,15 @@ class CurrencyRepositoryTest {
     }
 
     @Test
-    fun getPoundCurrencyNormalExecution()  = runTest {
+    fun getPoundCurrencyNormalExecution() = runTest {
         // Given
         val mockPoundCurrency = PoundCurrency("19/11/2024", 1.0)
-        whenever(currencyMock.getCurrencies()).thenReturn(ResponseApiCurrency("19/11/2024", mapOf("gbp" to 1.0)))
+        whenever(currencyMock.getCurrencies()).thenReturn(
+            ResponseApiCurrency(
+                "19/11/2024",
+                mapOf("gbp" to 1.0)
+            )
+        )
 
         // When
         val result = repository.getPoundCurrency()
@@ -44,11 +49,16 @@ class CurrencyRepositoryTest {
     }
 
     @Test
-    fun getPoundCurrencyFallbackExecution()  = runTest {
+    fun getPoundCurrencyFallbackExecution() = runTest {
         // Given
         val mockPoundCurrency = PoundCurrency("19/11/2024", 1.0)
         whenever(currencyMock.getCurrencies()).thenThrow(RuntimeException())
-        whenever(fallbackMock.getCurrencies()).thenReturn(ResponseApiCurrency("19/11/2024", mapOf("gbp" to 1.0)))
+        whenever(fallbackMock.getCurrencies()).thenReturn(
+            ResponseApiCurrency(
+                "19/11/2024",
+                mapOf("gbp" to 1.0)
+            )
+        )
 
         // When
         val result = repository.getPoundCurrency()

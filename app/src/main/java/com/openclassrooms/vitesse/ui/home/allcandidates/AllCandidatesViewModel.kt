@@ -2,8 +2,8 @@ package com.openclassrooms.vitesse.ui.home.allcandidates
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.openclassrooms.vitesse.data.repository.CandidateRepository
 import com.openclassrooms.vitesse.domain.model.Candidate
+import com.openclassrooms.vitesse.domain.usecase.candidate.GetAllCandidateUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,7 +14,9 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class AllCandidatesViewModel @Inject constructor(private val candidateRepository: CandidateRepository) : ViewModel() {
+class AllCandidatesViewModel @Inject constructor(
+    private val getAllCandidateUseCase: GetAllCandidateUseCase
+) : ViewModel() {
     private val _candidatesFlow = MutableStateFlow<List<Candidate>>(emptyList())
     val candidatesFlow: StateFlow<List<Candidate>> = _candidatesFlow.asStateFlow()
 
@@ -25,7 +27,7 @@ class AllCandidatesViewModel @Inject constructor(private val candidateRepository
 
     fun loadAllCandidates() {
         viewModelScope.launch(Dispatchers.IO) {
-            val candidates = candidateRepository.getAllCandidates()
+            val candidates = getAllCandidateUseCase.execute()
             _candidatesFlow.value = candidates
         }
     }
@@ -36,7 +38,7 @@ class AllCandidatesViewModel @Inject constructor(private val candidateRepository
      */
     fun filter(query: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            val candidates = candidateRepository.getAllCandidates()
+            val candidates = getAllCandidateUseCase.execute()
             _candidatesFlow.update {
                 candidates.filter { candidate ->
                     candidate.firstName.contains(query, ignoreCase = true) ||

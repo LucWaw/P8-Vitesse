@@ -2,8 +2,8 @@ package com.openclassrooms.vitesse.ui.home.favorites
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.openclassrooms.vitesse.data.repository.FavoriteRepository
 import com.openclassrooms.vitesse.domain.model.Candidate
+import com.openclassrooms.vitesse.domain.usecase.favorite.GetAllFavoriteCandidateUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class FavoriteViewModel @Inject constructor(private val favoriteRepository: FavoriteRepository) : ViewModel(){
+class FavoriteViewModel @Inject constructor(private val getAllFavoriteCandidateUseCase: GetAllFavoriteCandidateUseCase) : ViewModel(){
     private val _favoritesFlow = MutableStateFlow<List<Candidate>>(emptyList())
     val favoritesFlow: StateFlow<List<Candidate>> = _favoritesFlow.asStateFlow()
 
@@ -23,7 +23,7 @@ class FavoriteViewModel @Inject constructor(private val favoriteRepository: Favo
 
     fun loadAllFavorites(){
         viewModelScope.launch(Dispatchers.IO) {
-            val favorites = favoriteRepository.getAllFavoritesCandidates()
+            val favorites = getAllFavoriteCandidateUseCase.execute()
             _favoritesFlow.value = favorites
         }
     }

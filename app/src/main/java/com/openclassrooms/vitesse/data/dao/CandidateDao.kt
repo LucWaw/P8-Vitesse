@@ -11,7 +11,6 @@ interface CandidateDao {
     @Upsert
     suspend fun addCandidate(Candidate: CandidateDto): Long
 
-
     @Query("SELECT * FROM candidate")
     fun getAllCandidates(): Flow<List<CandidateDto>>
 
@@ -20,8 +19,5 @@ interface CandidateDao {
 
     @Query("DELETE FROM candidate WHERE id = :id")
     suspend fun deleteCandidateById(id: Long)
-
-    @Query("DELETE FROM candidate")
-    fun deleteAll()
 
 }

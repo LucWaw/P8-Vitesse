@@ -47,6 +47,10 @@ android {
     buildFeatures {
         viewBinding = true
     }
+
+    testOptions{
+        unitTests.isReturnDefaultValues = true
+    }
 }
 
 tasks.withType<Test> {
@@ -60,6 +64,13 @@ dependencies {
     testRuntimeOnly(libs.junit.jupiter.engine)
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.kotlinx.coroutines.android)
+
+    //test instrumentation junit 4
+    androidTestImplementation(libs.kotlinx.coroutines.test)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(libs.turbine)
+
 
     //mockito
     testImplementation(libs.mockito.junit.jupiter)
@@ -99,6 +110,5 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+
 }

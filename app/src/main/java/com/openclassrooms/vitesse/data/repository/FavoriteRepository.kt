@@ -48,17 +48,6 @@ class FavoriteRepository(private val favoriteDao: FavoriteDao) {
         }
     }
 
-    // Get candidate by favorite ID
-    suspend fun getCandidateFromFavoriteId(candidateId: Long): Candidate? {
-        return try {
-            val candidateDto = favoriteDao.getCandidateFromFavoriteId(candidateId)
-            Candidate.fromDto(candidateDto)
-        } catch (e: Exception) {
-            Log.d("DatabaseError", "Error while getting candidate from favorite ID", e)
-            null
-        }
-    }
-
     // Delete a favorite by candidate ID
     suspend fun deleteFavoriteById(candidateId: Long) {
         try {
