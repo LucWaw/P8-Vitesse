@@ -20,6 +20,7 @@ constraintlayout = "2.2.0"
 materialVersion = "1.9.0"
 mockitoJunitJupiter = "5.14.1"
 mockitoKotlin = "5.4.0"
+mockk = "1.12.4"
 moshiKotlin = "1.15.1"
 retrofit = "2.11.0"
 room = "2.6.1"
@@ -51,6 +52,7 @@ material-v190 = { module = "com.google.android.material:material", version.ref =
 mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockitoJunitJupiter" }
 mockito-junit-jupiter = { module = "org.mockito:mockito-junit-jupiter", version.ref = "mockitoJunitJupiter" }
 mockito-kotlin = { module = "org.mockito.kotlin:mockito-kotlin", version.ref = "mockitoKotlin" }
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 moshi-kotlin = { module = "com.squareup.moshi:moshi-kotlin", version.ref = "moshiKotlin" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }

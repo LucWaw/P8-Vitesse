@@ -59,6 +59,8 @@ tasks.withType<Test> {
 
 dependencies {
 
+    testImplementation(libs.mockk)
+
     //test Junit5
     testImplementation(libs.junit.jupiter.api)
     testRuntimeOnly(libs.junit.jupiter.engine)
