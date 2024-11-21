@@ -1,7 +1,7 @@
 package com.openclassrooms.vitesse.domain.usecase.candidate
 
 import android.net.Uri
-import com.openclassrooms.vitesse.data.repository.CandidateRepository
+import com.openclassrooms.vitesse.data.persistence.repository.CandidateRepository
 import com.openclassrooms.vitesse.domain.model.Candidate
 import io.mockk.every
 import io.mockk.mockk

@@ -1,6 +1,6 @@
 package com.openclassrooms.vitesse.domain.model
 
-import com.openclassrooms.vitesse.data.entity.FavoriteDto
+import com.openclassrooms.vitesse.data.persistence.entity.FavoriteDto
 
 data class Favorite(
     val candidateId: Long

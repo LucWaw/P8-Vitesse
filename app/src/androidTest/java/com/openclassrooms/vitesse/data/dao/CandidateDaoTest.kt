@@ -5,9 +5,9 @@ import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import app.cash.turbine.test
-import com.openclassrooms.vitesse.data.database.VitesseDatabase
-import com.openclassrooms.vitesse.data.entity.CandidateDto
-import com.openclassrooms.vitesse.data.entity.FavoriteDto
+import com.openclassrooms.vitesse.data.persistence.database.VitesseDatabase
+import com.openclassrooms.vitesse.data.persistence.entity.CandidateDto
+import com.openclassrooms.vitesse.data.persistence.entity.FavoriteDto
 import org.junit.After
 import org.junit.Before
 import org.junit.Test

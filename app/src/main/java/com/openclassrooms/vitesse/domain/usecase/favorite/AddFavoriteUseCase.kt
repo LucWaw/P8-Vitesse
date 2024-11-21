@@ -1,6 +1,6 @@
 package com.openclassrooms.vitesse.domain.usecase.favorite
 
-import com.openclassrooms.vitesse.data.repository.FavoriteRepository
+import com.openclassrooms.vitesse.data.persistence.repository.FavoriteRepository
 import com.openclassrooms.vitesse.domain.model.Favorite
 import javax.inject.Inject
 

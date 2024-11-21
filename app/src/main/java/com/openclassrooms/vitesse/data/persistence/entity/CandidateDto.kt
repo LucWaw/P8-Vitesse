@@ -1,4 +1,4 @@
-package com.openclassrooms.vitesse.data.entity
+package com.openclassrooms.vitesse.data.persistence.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

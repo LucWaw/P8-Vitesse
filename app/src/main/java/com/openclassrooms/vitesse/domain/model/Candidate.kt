@@ -1,10 +1,8 @@
 package com.openclassrooms.vitesse.domain.model
 
 import android.net.Uri
-import com.openclassrooms.vitesse.data.entity.CandidateDto
+import com.openclassrooms.vitesse.data.persistence.entity.CandidateDto
 import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.ZoneOffset
 
 data class Candidate(
     val id: Long? = null,

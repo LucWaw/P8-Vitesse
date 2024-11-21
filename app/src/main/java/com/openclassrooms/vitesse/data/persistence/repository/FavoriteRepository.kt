@@ -1,7 +1,7 @@
-package com.openclassrooms.vitesse.data.repository
+package com.openclassrooms.vitesse.data.persistence.repository
 
 import android.util.Log
-import com.openclassrooms.vitesse.data.dao.FavoriteDao
+import com.openclassrooms.vitesse.data.persistence.dao.FavoriteDao
 import com.openclassrooms.vitesse.domain.model.Candidate
 import com.openclassrooms.vitesse.domain.model.Favorite
 import kotlinx.coroutines.ExperimentalCoroutinesApi

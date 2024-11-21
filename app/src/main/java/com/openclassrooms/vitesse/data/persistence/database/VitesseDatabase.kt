@@ -1,4 +1,4 @@
-package com.openclassrooms.vitesse.data.database
+package com.openclassrooms.vitesse.data.persistence.database
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -9,10 +9,10 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.openclassrooms.vitesse.data.dao.CandidateDao
-import com.openclassrooms.vitesse.data.dao.FavoriteDao
-import com.openclassrooms.vitesse.data.entity.CandidateDto
-import com.openclassrooms.vitesse.data.entity.FavoriteDto
+import com.openclassrooms.vitesse.data.persistence.dao.CandidateDao
+import com.openclassrooms.vitesse.data.persistence.dao.FavoriteDao
+import com.openclassrooms.vitesse.data.persistence.entity.CandidateDto
+import com.openclassrooms.vitesse.data.persistence.entity.FavoriteDto
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -104,7 +104,7 @@ abstract class VitesseDatabase : RoomDatabase() {
                     lastName = "Singh",
                     phoneNumber = "0254546465",
                     email = "zfdfz@exemple.com",
-                    birthday = getEpochMilliFromLocalDate(1980, 1, 1),
+                    birthday = getEpochDayFromLocalDate(1980, 1, 1),
                     salaryClaim = 1000.0,
                     notes = """
             Ranjit Singh has over 20 years of experience in logistics and supply chain management. 
@@ -123,7 +123,7 @@ abstract class VitesseDatabase : RoomDatabase() {
                     lastName = "Siddeswara",
                     phoneNumber = "0454685874",
                     email = "martyna@exemple.com",
-                    birthday = getEpochMilliFromLocalDate(1990, 1, 1),
+                    birthday = getEpochDayFromLocalDate(1990, 1, 1),
                     salaryClaim = 1000.0,
                     notes = """
             Martyna Siddeswara is a dedicated software developer with 5 years of experience in Android development. 
@@ -169,7 +169,7 @@ abstract class VitesseDatabase : RoomDatabase() {
                     lastName = "O'Connor",
                     phoneNumber = "0457869831",
                     email = "liam.oconnor@example.com",
-                    birthday = getEpochMilliFromLocalDate(1985, 6, 15),
+                    birthday = getEpochDayFromLocalDate(1985, 6, 15),
                     salaryClaim = 1200.0,
                     notes = "Candidate has extensive experience in project management.",
                     image = candidate1ImageUri?.toString() ?: ""
@@ -180,7 +180,7 @@ abstract class VitesseDatabase : RoomDatabase() {
                     lastName = "Garcia",
                     phoneNumber = "0471254786",
                     email = "sofia.garcia@example.com",
-                    birthday = getEpochMilliFromLocalDate(1992, 3, 22),
+                    birthday = getEpochDayFromLocalDate(1992, 3, 22),
                     salaryClaim = 1500.0,
                     notes = "Excellent team leader and problem solver.",
                     image = candidate2ImageUri?.toString() ?: ""
@@ -191,7 +191,7 @@ abstract class VitesseDatabase : RoomDatabase() {
                     lastName = "Kowalski",
                     phoneNumber = "0462547982",
                     email = "ethan.kowalski@example.com",
-                    birthday = getEpochMilliFromLocalDate(1990, 11, 5),
+                    birthday = getEpochDayFromLocalDate(1990, 11, 5),
                     salaryClaim = 1400.0,
                     notes = "Expert in software development and cloud solutions.",
                     image = candidate3ImageUri?.toString() ?: ""
@@ -202,7 +202,7 @@ abstract class VitesseDatabase : RoomDatabase() {
                     lastName = "Schneider",
                     phoneNumber = "0456893214",
                     email = "mia.schneider@example.com",
-                    birthday = getEpochMilliFromLocalDate(1987, 9, 12),
+                    birthday = getEpochDayFromLocalDate(1987, 9, 12),
                     salaryClaim = 1300.0,
                     notes = "Specialist in marketing and brand management.",
                     image = candidate4ImageUri?.toString() ?: ""
@@ -213,7 +213,7 @@ abstract class VitesseDatabase : RoomDatabase() {
                     lastName = "Nguyen",
                     phoneNumber = "0461239784",
                     email = "noah.nguyen@example.com",
-                    birthday = getEpochMilliFromLocalDate(1995, 12, 8),
+                    birthday = getEpochDayFromLocalDate(1995, 12, 8),
                     salaryClaim = 1100.0,
                     notes = "Proficient in data analysis and business intelligence.",
                     image = candidate5ImageUri?.toString() ?: ""
@@ -229,7 +229,7 @@ abstract class VitesseDatabase : RoomDatabase() {
 
         }
 
-        fun getEpochMilliFromLocalDate(year: Int, month: Int, day: Int): Long {
+        private fun getEpochDayFromLocalDate(year: Int, month: Int, day: Int): Long {
             return LocalDate.of(year, month, day).toEpochDay()
         }
 

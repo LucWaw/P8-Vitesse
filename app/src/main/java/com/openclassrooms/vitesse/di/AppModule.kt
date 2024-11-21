@@ -4,11 +4,11 @@ import android.content.Context
 import com.openclassrooms.vitesse.data.api.network.CurrencyApi
 import com.openclassrooms.vitesse.data.api.network.FallbackApi
 import com.openclassrooms.vitesse.data.api.repository.CurrencyRepository
-import com.openclassrooms.vitesse.data.dao.CandidateDao
-import com.openclassrooms.vitesse.data.dao.FavoriteDao
-import com.openclassrooms.vitesse.data.database.VitesseDatabase
-import com.openclassrooms.vitesse.data.repository.CandidateRepository
-import com.openclassrooms.vitesse.data.repository.FavoriteRepository
+import com.openclassrooms.vitesse.data.persistence.dao.CandidateDao
+import com.openclassrooms.vitesse.data.persistence.dao.FavoriteDao
+import com.openclassrooms.vitesse.data.persistence.database.VitesseDatabase
+import com.openclassrooms.vitesse.data.persistence.repository.CandidateRepository
+import com.openclassrooms.vitesse.data.persistence.repository.FavoriteRepository
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module

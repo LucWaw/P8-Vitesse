@@ -1,10 +1,10 @@
-package com.openclassrooms.vitesse.data.dao
+package com.openclassrooms.vitesse.data.persistence.dao
 
 import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Upsert
-import com.openclassrooms.vitesse.data.entity.CandidateDto
-import com.openclassrooms.vitesse.data.entity.FavoriteDto
+import com.openclassrooms.vitesse.data.persistence.entity.CandidateDto
+import com.openclassrooms.vitesse.data.persistence.entity.FavoriteDto
 import kotlinx.coroutines.flow.Flow
 
 @Dao

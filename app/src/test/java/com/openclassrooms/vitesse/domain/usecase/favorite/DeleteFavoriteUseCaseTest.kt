@@ -1,6 +1,6 @@
 package com.openclassrooms.vitesse.domain.usecase.favorite
 
-import com.openclassrooms.vitesse.data.repository.FavoriteRepository
+import com.openclassrooms.vitesse.data.persistence.repository.FavoriteRepository
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test

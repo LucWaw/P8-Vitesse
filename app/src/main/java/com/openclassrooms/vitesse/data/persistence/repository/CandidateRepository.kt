@@ -1,7 +1,7 @@
-package com.openclassrooms.vitesse.data.repository
+package com.openclassrooms.vitesse.data.persistence.repository
 
 import android.util.Log
-import com.openclassrooms.vitesse.data.dao.CandidateDao
+import com.openclassrooms.vitesse.data.persistence.dao.CandidateDao
 import com.openclassrooms.vitesse.domain.model.Candidate
 import kotlinx.coroutines.flow.first
 
