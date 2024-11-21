@@ -20,4 +20,7 @@ interface CandidateDao {
     @Query("DELETE FROM candidate WHERE id = :id")
     suspend fun deleteCandidateById(id: Long)
 
+    @Query("DELETE FROM candidate")
+    suspend fun deleteAllCandidates()
+
 }

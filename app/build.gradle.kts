@@ -59,6 +59,9 @@ tasks.withType<Test> {
 
 dependencies {
 
+    implementation(libs.picasso)
+
+
     testImplementation(libs.mockk)
 
     //test Junit5

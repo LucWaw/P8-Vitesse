@@ -93,8 +93,8 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideAppDatabase(@ApplicationContext context: Context): VitesseDatabase {
-        return VitesseDatabase.getDatabase(context)
+    fun provideAppDatabase(@ApplicationContext context: Context, coroutineScope: CoroutineScope): VitesseDatabase {
+        return VitesseDatabase.getDatabase(context, coroutineScope)
     }
 
     @Provides

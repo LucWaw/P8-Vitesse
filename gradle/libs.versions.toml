@@ -22,6 +22,7 @@ mockitoJunitJupiter = "5.14.1"
 mockitoKotlin = "5.4.0"
 mockk = "1.12.4"
 moshiKotlin = "1.15.1"
+picasso = "2.71828"
 retrofit = "2.11.0"
 room = "2.6.1"
 ksp = "1.9.23-1.0.20"
@@ -54,6 +55,7 @@ mockito-junit-jupiter = { module = "org.mockito:mockito-junit-jupiter", version.
 mockito-kotlin = { module = "org.mockito.kotlin:mockito-kotlin", version.ref = "mockitoKotlin" }
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 moshi-kotlin = { module = "com.squareup.moshi:moshi-kotlin", version.ref = "moshiKotlin" }
+picasso = { module = "com.squareup.picasso:picasso", version.ref = "picasso" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }

@@ -1,6 +1,5 @@
 package com.openclassrooms.vitesse.ui.home.favorites
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,11 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.openclassrooms.vitesse.R
-import com.openclassrooms.vitesse.databinding.ActivityMainBinding
 import com.openclassrooms.vitesse.databinding.RecyclerCandidatesBinding
 import com.openclassrooms.vitesse.domain.model.Candidate
-import com.openclassrooms.vitesse.ui.MainActivity
 import com.openclassrooms.vitesse.ui.detail.DetailScreen
 import com.openclassrooms.vitesse.ui.home.CandidateAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,8 +21,6 @@ class FavoriteFragment  : Fragment(), CandidateAdapter.OnCandidateClickListener 
     private var _binding: RecyclerCandidatesBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var activityBinding: ActivityMainBinding
-
 
     private val viewModel: FavoriteViewModel by viewModels()
     private lateinit var candidateAdapter: CandidateAdapter
@@ -34,13 +28,6 @@ class FavoriteFragment  : Fragment(), CandidateAdapter.OnCandidateClickListener 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is MainActivity) {
-            activityBinding = ActivityMainBinding.bind(context.findViewById(R.id.main))
-        }
     }
 
     override fun onCreateView(
