@@ -11,10 +11,12 @@ import androidx.room.PrimaryKey
             entity = CandidateDto::class,
             parentColumns = ["id"],
             childColumns = ["candidateId"],
-            onDelete = ForeignKey.CASCADE // to automatically delete favorite if the candidate is deleted
+            onDelete = ForeignKey.CASCADE
+            // to automatically delete favorite if the candidate is deleted
         )
     ]
 )
 data class FavoriteDto(
-    @PrimaryKey val candidateId: Long // candidateId Is Both primary key and Foreign Key (so its also unique)
+    @PrimaryKey val candidateId: Long
+    // candidateId Is Both primary key and Foreign Key (so its also unique)
 )

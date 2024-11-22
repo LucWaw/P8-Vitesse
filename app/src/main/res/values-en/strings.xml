@@ -21,7 +21,7 @@
     <string name="save">Save</string>
     <string name="mandatory_field">Mandatory field</string>
     <string name="invalid_format">Invalid format</string>
-    <string name="star">Star</string>
+    <string name="star">Add to Favorites</string>
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
     <string name="call">Call</string>
@@ -39,4 +39,5 @@
     <string name="boutonAddDescription">New candidate</string>
     <string name="enterADate">Enter a date</string>
     <string name="selectADate">Delect a date</string>
+    <string name="back">Back</string>
 </resources>

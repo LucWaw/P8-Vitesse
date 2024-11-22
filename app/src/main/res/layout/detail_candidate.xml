@@ -23,6 +23,7 @@
                 android:layout_height="wrap_content"
                 android:minHeight="?attr/actionBarSize"
                 app:navigationIcon="@drawable/baseline_arrow_back_24"
+                app:navigationContentDescription="@string/back"
                 app:menu="@menu/menu_detail_candidate"
                 tools:title="John Doe" />
 
@@ -68,7 +69,7 @@
             style="?attr/materialIconButtonOutlinedStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/call"
+            android:contentDescription="@string/sms"
             app:icon="@drawable/sms"
             app:iconTint="@null"
             app:layout_constraintEnd_toStartOf="@id/emailIconButton"
@@ -90,7 +91,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="40dp"
-            android:contentDescription="@string/call"
+            android:contentDescription="@string/email"
             app:icon="@drawable/email"
             app:iconTint="@null"
             app:layout_constraintEnd_toEndOf="parent"

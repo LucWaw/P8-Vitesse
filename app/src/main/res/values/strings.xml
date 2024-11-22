@@ -20,7 +20,7 @@
     <string name="save">Sauvegarder</string>
     <string name="mandatory_field">Champ obligatoire</string>
     <string name="invalid_format">Format invalide</string>
-    <string name="star">Étoile</string>
+    <string name="star">Mettre en Favoris</string>
     <string name="edit">Modifier</string>
     <string name="delete">Supprimer</string>
     <string name="call">Appel</string>
@@ -38,4 +38,5 @@
     <string name="boutonAddDescription">Nouveau candidat</string>
     <string name="enterADate">Entrer une date</string>
     <string name="selectADate">Sélectionner une date</string>
+    <string name="back">Retour</string>
 </resources>
